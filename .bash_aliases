@@ -1,4 +1,4 @@
-# TMUX
+# Tmux
 alias tm="tmux"
 alias tmkses="tmux kill-session"
 alias tmkser="tmux kill-server"
