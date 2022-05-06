@@ -122,15 +122,6 @@ set foldmethod=indent
 set nofoldenable " no folds when open file
 set foldnestmax=10
 
-" vim-go preferences
-let g:go_fmt_command = "goimports"
-let g:go_addtags_transform = "camelcase"
-let g:go_highlight_functions = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_fields = 1
-
 " deoplete preferences
 let g:deoplete#enable_at_startup = 1
 " https://github.com/Shougo/deoplete.nvim/issues/115#issuecomment-170237485
@@ -170,7 +161,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 nmap <silent> ,t :tabnew<CR>
 
 " switch language using Ctrl-l
-inoremap <C-l>
+inoremap <C-l> <C-^>
 
 " disabling arrows in almost all modes
 inoremap <Down> <Nop>
