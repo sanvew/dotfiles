@@ -1,0 +1,14 @@
+session_name: '0'
+windows:
+- focus: 'true'
+  layout: e742,191x51,0,0{105x51,0,0,1,85x51,106,0[85x25,106,0,2,85x25,106,26,3]}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - shell_command:
+    - vim .
+    focus: true
+  - pane
+  - lf
+  start_directory: /home/sanvew/projects/leetcode-practise
+  window_name: bash
