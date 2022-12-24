@@ -10,7 +10,6 @@ alias dco='docker-compose'
 jupyter() {
     CONFIG_VOLUME=jupyter-config
     IS_VOLUME_EXISTS=$(docker volume list | awk -v volume_name=$CONFIG_VOLUME '(NR>1 && $2~volume_name){print $2}')
-
     [ -z $IS_VOLUME_EXISTS ] && docker volume create $CONFIG_VOLUME
 
     docker run --rm -p 8888:8888 \
@@ -20,8 +19,14 @@ jupyter() {
         $@ jupyterlab-extended:latest
 }
 alias jupyter-here='jupyter -v $(pwd):/home/jovyan/work'
-alias ngx='docker run --rm -v $(pwd):/usr/share/nginx/html:ro -p 8080:80  nginx:mainline-alpine'
-
+ngx() {
+    [ -z $1 ] && port="8080:80" || port="$1:80"
+    docker run \
+        --rm \
+        -v $(pwd):/usr/share/nginx/html:ro \
+        -p $port \
+        nginx:mainline-alpine
+}
 
 # Pandocpdf
 pandocpdf() {
