@@ -9,14 +9,15 @@ alias d='docker'
 alias dco='docker-compose'
 jupyter() {
     CONFIG_VOLUME=jupyter-config
-    IS_VOLUME_EXISTS=$(docker volume list | awk -v volume_name=$CONFIG_VOLUME '(NR>1 && $2~volume_name){print $2}')
-    [ -z $IS_VOLUME_EXISTS ] && docker volume create $CONFIG_VOLUME
+    IMAGE=jupyter/tensorflow-notebook
+    IMAGE_VERSION=2023-01-09
 
     docker run --rm -p 8888:8888 \
         -v $HOME/.ssh:/home/jovyan/.ssh \
         --mount type=bind,source=$HOME/.gitconfig,target=/home/jovyan/.gitconfig \
         -v $CONFIG_VOLUME:/home/jovyan/.jupyter \
-        $@ jupyterlab-extended:latest
+        -v $(pwd):/home/jovyan/work \
+        $@ $IMAGE:$IMAGE_VERSION
 }
 alias jupyter-here='jupyter -v $(pwd):/home/jovyan/work'
 ngx() {

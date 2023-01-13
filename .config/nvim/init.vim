@@ -64,7 +64,7 @@ set imsearch=0
 
 " tabs
 set tabstop=4 shiftwidth=4 expandtab smarttab
-set wrap! linebreak nolist
+set wrap linebreak nolist
 autocmd FileType javascript,html,htmldjango,arduino setlocal shiftwidth=2 softtabstop=2 expandtab
 
 " enable vim-rainbow
