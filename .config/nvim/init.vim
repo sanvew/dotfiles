@@ -7,14 +7,8 @@ Plug 'jiangmiao/auto-pairs'
 
 " autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-if has("python3")
-    silent exe "!pip3 list | grep pynvim || pip3 install --user pynvim"
-endif
 Plug 'Shougo/deoplete-clangx' " C/C++
 Plug 'deoplete-plugins/deoplete-jedi' " Python
-if has("python3")
-    silent exe "!pip3 list | grep jedi || pip3 install --user jedi"
-endif
 Plug 'mattn/emmet-vim'
 
 " syntax highlighting and checking
