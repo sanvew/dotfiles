@@ -1,0 +1,22 @@
+# common
+brew "git"
+brew "font-hack-nerd-font"
+
+# bash
+brew "bash"
+brew "bash-completion@2"
+
+# lf
+brew "lf"
+brew "ctpv"
+brew "highlight"
+brew "jq"
+brew "atool"
+# TODO: add [Überzug](https://github.com/jstkdng/ueberzugpp)
+
+# nvim
+brew "neovim"
+
+# brew
+brew "tmux"
+

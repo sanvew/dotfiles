@@ -1,0 +1,13 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.config/lf:
+      create: true
+      glob: true
+      path: './lf/**'
+      exclude: [ '**/lf.conf.yaml' ]
+
+

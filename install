@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+
+CONFIG="install.conf.yaml"
+DOTBOT_DIR=".dotbot"
+
+KERNEL_NAME=$(uname -s)
+KERNEL_RELEASE=$(uname -r)
+
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "${BASEDIR}"
+
+(cd "${DOTBOT_DIR}" && git submodule update --init --recursive)
+
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+  -d "${BASEDIR}" \
+  -p "${BASEDIR}/.dotbot-plugin/dotbot-include/include.py" \
+  -p "${BASEDIR}/.dotbot-plugin/dotbot-if/if.py" \
+  -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
+  -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \
+  -c "${CONFIG}" "${@}"

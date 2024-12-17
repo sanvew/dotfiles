@@ -1,0 +1,12 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.config/ideavim:
+      create: true
+      glob: true
+      path: './ideavim/**'
+      exclude: [ '**/ideavim.conf.yaml' ]
+

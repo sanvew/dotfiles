@@ -1,0 +1,17 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.config/nvim:
+      create: true
+      glob: true
+      path: './nvim/**'
+      exclude: [ '**/nvim.conf.yaml' ]
+    ~/.config/nvim/.luarc.json: './nvim/.luarc.json'
+
+- shell:
+    - nvim --headless +'PlugInstall --sync' +qa 
+    - nvim +UpdateRemotePlugins +qa
+

@@ -1,9 +1,10 @@
 # Settings
 set icons
 set shell sh
-set previewer stpv
-set cleaner stpvimgclr
-&stpvimg --listen $id
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
 
 set ifs "\n"
 set filesep "\n"

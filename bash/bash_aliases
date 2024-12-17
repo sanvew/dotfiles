@@ -6,11 +6,11 @@ alias tmls="tmux ls"
 
 # Docker
 alias d='docker'
-alias dco='docker-compose'
+alias dco='docker compose'
 jupyter() {
     CONFIG_VOLUME=jupyter-config
-    IMAGE=jupyter/tensorflow-notebook
-    IMAGE_VERSION=2023-01-09
+    IMAGE=jupyter/datascience-notebook
+    IMAGE_VERSION=2023-10-17
 
     docker run --rm -p 8888:8888 \
         -v $HOME/.ssh:/home/jovyan/.ssh \
@@ -19,13 +19,13 @@ jupyter() {
         -v $(pwd):/home/jovyan/work \
         $@ $IMAGE:$IMAGE_VERSION
 }
-alias jupyter-here='jupyter -v $(pwd):/home/jovyan/work'
 ngx() {
     [ -z $1 ] && port="8080:80" || port="$1:80"
     docker run \
         --rm \
         -v $(pwd):/usr/share/nginx/html:ro \
         -p $port \
+        --name ngx_$(basename $(pwd)) \
         nginx:mainline-alpine
 }
 

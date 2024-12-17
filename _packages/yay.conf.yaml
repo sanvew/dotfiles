@@ -1,0 +1,18 @@
+- yay:
+    # common
+    - xclip
+    # bash
+    - bash
+    - bash-completion
+    # lf
+    - lf
+    - ctpv-git
+    - highlight
+    - jq
+    - atool
+    - ueberzug
+    # nvim
+    - neovim
+    # tmux
+    - tmux
+

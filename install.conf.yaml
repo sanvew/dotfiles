@@ -1,0 +1,20 @@
+- defaults:
+    include:
+        isolated: True
+
+# packages installation
+- if:
+  - cond: 'command -v yay'
+    met:
+      - include: _packages/yay.conf.yaml
+  - cond: 'command -v brew'
+    met:
+      - include: _packages/brew.conf.yaml
+
+# config files linking
+- include: bash/bash.conf.yaml
+- include: lf/lf.conf.yaml
+- include: nvim/nvim.conf.yaml
+- include: tmux/tmux.conf.yaml
+- include: ideavim/ideavim.conf.yaml
+

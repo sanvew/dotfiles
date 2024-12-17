@@ -1,0 +1,13 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/:
+      create: true
+      glob: true
+      path: './bash/**'
+      prefix: '.'
+      exclude: [ '**/bash.conf.yaml' ]
+

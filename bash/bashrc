@@ -11,6 +11,10 @@ case $- in
       *) return;;
 esac
 
+# system information
+KERNEL_NAME=$(uname -s)
+KERNEL_RELEASE=$(uname -r)
+
 # history preferences
 HISTCONTROL=ignoreboth
 HISTSIZE=-1
@@ -50,8 +54,12 @@ export GPG_TTY
 [ -e $HOME/.bash_aliases ] && source $HOME/.bash_aliases
 
 # completions
-[ -e /usr/share/bash-completion/bash_completion ] \
-    && source /usr/share/bash-completion/bash_completion
+BASH_COMPLETION_PATH=$([ "$KERNEL_NAME" = 'Darwin' ] \
+    && echo "/opt/homebrew/etc/profile.d/bash_completion.sh" \
+    || echo "/usr/share/bash-completion/bash_completion"
+)
+
+[ -e "$BASH_COMPLETION_PATH" ] && source $BASH_COMPLETION_PATH
 if [ -e /usr/share/bash-complete-alias/complete_alias ]; then
     source /usr/share/bash-complete-alias/complete_alias
     complete -F __start_kubectl k
@@ -68,11 +76,12 @@ function source_git-bash-prompt() {
 function clone_git-bash-prompt() {
     git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.local/src/bash-git-prompt --depth=1
 }
-[ -f "$HOME/.local/src/bash-git-prompt/gitprompt.sh" ] && source_git-bash-prompt \
+[ -f "$HOME/.local/src/bash-git-prompt/gitprompt.sh" ] \
+    && source_git-bash-prompt \
     || { clone_git-bash-prompt && clone_git-bash-prompt ; }
 
 # environment files
-[ -e $HOME/.env ] && source $HOME/.env
+[ -e $HOME/.env ] && . $HOME/.env
 
 # lf settings
 LFCD=$HOME/.config/lf/lfcd.sh
@@ -83,4 +92,5 @@ bind '"\C-o":"lfcd\C-m"'
 
 export EDITOR=/usr/bin/nvim
 
-PATH=$PATH:~/go/bin:~/.scripts
+# go binaries
+export PATH=$PATH:$HOME/go/bin

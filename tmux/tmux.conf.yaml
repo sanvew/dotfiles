@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.config/tmux:
+      create: true
+      glob: true
+      path: './tmux/**'
+      exclude: [ '**/tmux.conf.yaml' ]
+
+- shell:
+    - >
+      [ ! -d '~/.config/tmux/plugins/tpm' ]
+      && git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+      || :
+    - ~/.config/tmux/plugins/tpm/bin/install_plugins
+
