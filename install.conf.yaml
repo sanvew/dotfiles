@@ -4,12 +4,18 @@
 
 # packages installation
 - if:
-  - cond: 'command -v yay'
+    cond: '[ -z "$SKIP_PACKAGE_INSTALL" ]'
     met:
-      - include: _packages/yay.conf.yaml
-  - cond: 'command -v brew'
-    met:
-      - include: _packages/brew.conf.yaml
+      - if:
+        - cond: 'command -v yay'
+          met:
+            - include: packages/yay.conf.yaml
+        - cond: 'command -v brew'
+          met:
+            - include: packages/brew.conf.yaml
+    unmet:
+      - shell:
+        - echo Skipping package installation!
 
 # config files linking
 - include: ssh/ssh.conf.yaml

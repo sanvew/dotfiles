@@ -22,3 +22,4 @@ cd "${BASEDIR}"
   -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
   -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \
   -c "${CONFIG}" "${@}"
+

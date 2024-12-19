@@ -4,6 +4,11 @@ alias tmkses="tmux kill-session"
 alias tmkser="tmux kill-server"
 alias tmls="tmux ls"
 
+# Vim
+alias vi="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
 # Docker
 alias d='docker'
 alias dco='docker compose'
@@ -27,11 +32,6 @@ ngx() {
         -p $port \
         --name ngx_$(basename $(pwd)) \
         nginx:mainline-alpine
-}
-
-# Pandocpdf
-pandocpdf() {
-    pandoc --pdf-engine=xelatex -V mainfont=FreeSerif $1 -o ${1/.md/.pdf}
 }
 
 # Kubernetes

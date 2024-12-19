@@ -7,6 +7,7 @@
     ~/:
       create: true
       glob: true
+      force: true
       path: './bash/**'
       prefix: '.'
       exclude: [ '**/bash.conf.yaml' ]

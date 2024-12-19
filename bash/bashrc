@@ -11,10 +11,6 @@ case $- in
       *) return;;
 esac
 
-# system information
-KERNEL_NAME=$(uname -s)
-KERNEL_RELEASE=$(uname -r)
-
 # history preferences
 HISTCONTROL=ignoreboth
 HISTSIZE=-1
@@ -53,20 +49,6 @@ export GPG_TTY
 # aliases
 [ -e $HOME/.bash_aliases ] && source $HOME/.bash_aliases
 
-# completions
-BASH_COMPLETION_PATH=$([ "$KERNEL_NAME" = 'Darwin' ] \
-    && echo "/opt/homebrew/etc/profile.d/bash_completion.sh" \
-    || echo "/usr/share/bash-completion/bash_completion"
-)
-
-[ -e "$BASH_COMPLETION_PATH" ] && source $BASH_COMPLETION_PATH
-if [ -e /usr/share/bash-complete-alias/complete_alias ]; then
-    source /usr/share/bash-complete-alias/complete_alias
-    complete -F __start_kubectl k
-    complete -F _complete_alias d
-    complete -F _complete_alias dco
-fi
-
 # git bash prompt
 function source_git-bash-prompt() {
     GIT_PROMPT_ONLY_IN_REPO=1
@@ -87,17 +69,43 @@ function clone_git-bash-prompt() {
 LFCD=$HOME/.config/lf/lfcd.sh
 if [ -f "$LFCD" ]; then
     source "$LFCD"
+    bind '"\C-o":"lfcd\C-m"'
 fi
-bind '"\C-o":"lfcd\C-m"'
 
 export EDITOR=nvim
+export PATH=$PATH:$HOME/go/bin:$HOME/.script
 
-# go binaries
-export PATH=$PATH:$HOME/go/bin
-# custom scripts
-export PATH=$PATH:$HOME/.script
-
+# system information
+KERNEL_NAME=$(uname -s)
+KERNEL_RELEASE=$(uname -r)
+############### System specific settings ###############
+#### macos ####
 if [ "$KERNEL_NAME" = 'Darwin' ]; then
+    # completion path
+    BASH_COMPLETION_PATH="/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+    # lf setting, reset default behavior of "\C-o"
+    # https://apple.stackexchange.com/questions/3253/ctrl-o-behavior-in-terminal-app
+    stty discard undef
+
     export PATH=$PATH:/opt/homebrew/bin
 fi
+
+#### linux ####
+if [ "$KERNEL_NAME" = 'Linux' ]; then
+    # completion path
+    BASH_COMPLETION_PATH="/usr/share/bash-completion/bash_completion"
+
+    # completion aliases
+    if [ -e /usr/share/bash-complete-alias/complete_alias ]; then
+        source /usr/share/bash-complete-alias/complete_alias
+        complete -F __start_kubectl k
+        complete -F _complete_alias d
+        complete -F _complete_alias dco
+    fi
+fi
+############### System specific settings ###############
+
+# completion
+[ -e "$BASH_COMPLETION_PATH" ] && source $BASH_COMPLETION_PATH
 
