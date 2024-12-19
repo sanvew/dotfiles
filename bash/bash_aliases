@@ -43,4 +43,3 @@ alias grep='grep --color=auto'
 alias ccat="highlight --out-format=ansi --force"
 alias cls='clear'
 alias sorc='source $HOME/.bashrc'
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

@@ -90,9 +90,14 @@ if [ -f "$LFCD" ]; then
 fi
 bind '"\C-o":"lfcd\C-m"'
 
-export EDITOR=/usr/bin/nvim
+export EDITOR=nvim
 
 # go binaries
 export PATH=$PATH:$HOME/go/bin
-# script custom scripts
+# custom scripts
 export PATH=$PATH:$HOME/.script
+
+if [ "$KERNEL_NAME" = 'Darwin' ]; then
+    export PATH=$PATH:/opt/homebrew/bin
+fi
+
