@@ -94,3 +94,5 @@ export EDITOR=/usr/bin/nvim
 
 # go binaries
 export PATH=$PATH:$HOME/go/bin
+# script custom scripts
+export PATH=$PATH:$HOME/.script

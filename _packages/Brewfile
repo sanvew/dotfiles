@@ -17,6 +17,7 @@ brew "atool"
 # nvim
 brew "neovim"
 
-# brew
+# tmux 
 brew "tmux"
+brew "tmuxp"
 

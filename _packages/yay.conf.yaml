@@ -15,4 +15,5 @@
     - neovim
     # tmux
     - tmux
+    - tmuxp
 
