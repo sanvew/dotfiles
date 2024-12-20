@@ -22,7 +22,7 @@ Install [brew](https://brew.sh/)
 ./install
 ```
 
-Set "SKIP\_PACKAGE\_INSTALL" env var, to skip package installation
+Set "SKIP\_PACKAGE\_INSTALL" env var to skip package installation
 ```shell
 SKIP_PACKAGE_INSTALL=1 ./install
 ```

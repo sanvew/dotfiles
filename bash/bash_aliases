@@ -34,8 +34,12 @@ ngx() {
         nginx:mainline-alpine
 }
 
-# Kubernetes
+# k8s
 alias k='kubectl'
+
+# scripts
+alias st-start='~/.script/syncthing/start'
+alias st-stop='~/.script/syncthing/stop'
 
 # misc
 alias ls='ls --color=auto'
