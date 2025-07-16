@@ -37,7 +37,7 @@ Plug('nvimtools/none-ls.nvim') -- linting and formatting lsp wrapper
 Plug('jay-babu/mason-null-ls.nvim')
 
 -- snippets
-Plug('L3MON4D3/LuaSnip') -- snippet engine 
+Plug('L3MON4D3/LuaSnip') -- snippet engine
 Plug('saadparwaiz1/cmp_luasnip')
 
 -- treesitter

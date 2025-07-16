@@ -21,11 +21,6 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -37,9 +32,9 @@ if [ "$color_prompt" = yes ]; then
     FGRN="\[\033[32m\]" # foreground green
     FYEL="\[\033[33m\]" # foreground yellow
     FBLE="\[\033[34m\]" # foreground blue
-    PS1="$HC$FYEL[$RS${debian_chroot:+($debian_chroot)}$HC$FGRN\u@\h $HC$FBLE\w$HC$FYEL]$RS\$ "
+    PS1="$HC$FYEL[$RS$HC$FGRN\u@\h $HC$FBLE\w$HC$FYEL]$RS\$ "
 else
-    PS1='[${debian_chroot:+($debian_chroot)}\u@\h \w]\$ '
+    PS1='[\u@\h \w]\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -50,17 +45,22 @@ export GPG_TTY
 [ -e $HOME/.bash_aliases ] && source $HOME/.bash_aliases
 
 # git bash prompt
+BASH_GIT_PROMPT_PATH=$HOME/.local/share/bash-git-prompt
 function source_git-bash-prompt() {
     GIT_PROMPT_ONLY_IN_REPO=1
     GIT_PROMPT_THEME=Single_line
-    source $HOME/.local/src/bash-git-prompt/gitprompt.sh
+    source $BASH_GIT_PROMPT_PATH/gitprompt.sh
 }
+
 function clone_git-bash-prompt() {
-    git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.local/src/bash-git-prompt --depth=1
+    git clone https://github.com/magicmonty/bash-git-prompt.git $BASH_GIT_PROMPT_PATH --depth=1
 }
-[ -f "$HOME/.local/src/bash-git-prompt/gitprompt.sh" ] \
-    && source_git-bash-prompt \
-    || { clone_git-bash-prompt && clone_git-bash-prompt ; }
+
+if [ -f "$BASH_GIT_PROMPT_PATH/gitprompt.sh" ]; then
+    source_git-bash-prompt
+else
+    clone_git-bash-prompt && source_git-bash-prompt
+fi
 
 # environment files
 [ -e $HOME/.env ] && . $HOME/.env

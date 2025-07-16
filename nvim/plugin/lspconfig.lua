@@ -38,5 +38,5 @@ lspconfig.pyright.setup({
 })
 
 -- linter and formatter
-lspconfig.ruff_lsp.setup({})
+lspconfig.ruff.setup({})
 
