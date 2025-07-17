@@ -9,6 +9,9 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
+# npm
+alias npm="pnpm"
+
 # Docker
 alias d='docker'
 alias dco='docker compose'
