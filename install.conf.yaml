@@ -19,7 +19,6 @@
 
 # config files linking
 - include: ssh/ssh.conf.yaml
-- include: script/script.conf.yaml
 - include: bash/bash.conf.yaml
 - include: lf/lf.conf.yaml
 - include: nvim/nvim.conf.yaml

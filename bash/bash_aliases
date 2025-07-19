@@ -41,8 +41,8 @@ ngx() {
 alias k='kubectl'
 
 # scripts
-alias st-start='~/.script/syncthing/start'
-alias st-stop='~/.script/syncthing/stop'
+alias st-start='$XDG_CONFIG_HOME/dotfiles/script/syncthing/start'
+alias st-stop='$XDG_CONFIG_HOME/dotfiles/script/syncthing/stop'
 
 # misc
 alias ls='ls --color=auto'

@@ -45,7 +45,7 @@ export GPG_TTY
 [ -e $HOME/.bash_aliases ] && source $HOME/.bash_aliases
 
 # git bash prompt
-BASH_GIT_PROMPT_PATH=$HOME/.local/share/bash-git-prompt
+BASH_GIT_PROMPT_PATH=$XDG_DATA_HOME/bash-git-prompt
 function source_git-bash-prompt() {
     GIT_PROMPT_ONLY_IN_REPO=1
     GIT_PROMPT_THEME=Single_line
@@ -72,8 +72,7 @@ if [ -f "$LFCD" ]; then
     bind '"\C-o":"lfcd\C-m"'
 fi
 
-export EDITOR=nvim
-export PATH=$PATH:$HOME/go/bin:$HOME/.script
+export PATH=$PATH:$XDG_DATA_HOME/dotfiles/script
 
 # system information
 KERNEL_NAME=$(uname -s)
