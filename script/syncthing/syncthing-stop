@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DOCKER_COMPOSE_PATH="$XDG_CONFIG_HOME/syncthing/docker-compose.yaml"
+
+docker compose -f $DOCKER_COMPOSE_PATH down

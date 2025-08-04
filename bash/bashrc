@@ -72,8 +72,6 @@ if [ -f "$LFCD" ]; then
     bind '"\C-o":"lfcd\C-m"'
 fi
 
-export PATH=$PATH:$XDG_DATA_HOME/dotfiles/script
-
 # system information
 KERNEL_NAME=$(uname -s)
 KERNEL_RELEASE=$(uname -r)
@@ -107,4 +105,3 @@ fi
 
 # completion
 [ -e "$BASH_COMPLETION_PATH" ] && source $BASH_COMPLETION_PATH
-

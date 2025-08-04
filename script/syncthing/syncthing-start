@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DOCKER_COMPOSE_PATH="$XDG_CONFIG_HOME/syncthing/docker-compose.yaml"
+
+mkdir -p $XDG_CONFIG_HOME/syncthing
+mkdir -p $HOME/Documents/syncthing
+
+export HOST_UID=$(id -u) HOST_GID=$(id -g)
+docker compose -f $DOCKER_COMPOSE_PATH up -d
+

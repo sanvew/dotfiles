@@ -13,6 +13,8 @@
     - ueberzug
     # nvim
     - neovim
+    - python # required for lsps
+    - npm # required for lsps
     # tmux
     - tmux
     - tmuxp

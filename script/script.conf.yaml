@@ -1,0 +1,17 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- create:
+    - ~/.local/bin
+
+# syncthing
+- link:
+    ~/.local/bin:
+      create: true
+      glob: true
+      force: true
+      path: './script/syncthing/**'
+      exclude: [ '**/docker-compose.yaml' ]
+    ~/.config/syncthing/docker-compose.yaml: './script/syncthing/docker-compose.yaml'

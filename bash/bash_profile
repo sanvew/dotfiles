@@ -5,13 +5,21 @@
 # programs
 export EDITOR=nvim
 
+# custom programs and scripts
+export PATH=$PATH:$HOME/.local/bin
+
 # XDG directories
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# rustup
+# rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+# go
+export GOPATH="$XDG_DATA_HOME/go"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+# pnpm
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+export PATH=$PATH:$PNPM_HOME
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-

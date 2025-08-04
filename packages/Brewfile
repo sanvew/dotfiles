@@ -16,6 +16,8 @@ brew "atool"
 
 # nvim
 brew "neovim"
+brew "python" # required for lsps
+brew "npm" # required for lsps
 
 # tmux 
 brew "tmux"
