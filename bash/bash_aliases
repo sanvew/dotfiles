@@ -9,9 +9,6 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# npm
-alias npm="pnpm"
-
 # Docker
 alias d='docker'
 alias dco='docker compose'
@@ -35,6 +32,14 @@ ngx() {
         -p $port \
         --name ngx_$(basename $(pwd)) \
         nginx:mainline-alpine
+}
+reload_dotfiles() {
+    CURRENT_PWD=$(pwd)
+    [ -z $1 ] && DOTFILES_DIR_PATH="$HOME/.local/share/dotfiles" || DOTFILES_DIR_PATH=$1
+
+    cd $DOTFILES_DIR_PATH \
+        && SKIP_PACKAGE_INSTALL=1 ./install \
+        && cd $CURRENT_PWD
 }
 
 # k8s

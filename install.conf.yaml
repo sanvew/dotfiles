@@ -1,6 +1,6 @@
 - defaults:
     include:
-        isolated: True
+      isolated: True
 
 # packages installation
 - if:
