@@ -1,6 +1,6 @@
 # Settings
 set icons
-set shell sh
+set shell bash
 set previewer ctpv
 set cleaner ctpvclear
 &ctpv -s $id

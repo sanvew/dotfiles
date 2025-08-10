@@ -23,10 +23,10 @@ shopt -s checkwinsize
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    *-256color) color_prompt=1;;
 esac
 
-if [ "$color_prompt" = yes ]; then
+if [ "$color_prompt" = 1 ]; then
     RS="\[\033[0m\]"    # reset
     HC="\[\033[1m\]"    # hicolor
     FGRN="\[\033[32m\]" # foreground green
