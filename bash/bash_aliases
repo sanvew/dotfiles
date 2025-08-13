@@ -35,9 +35,9 @@ ngx() {
 }
 reload_dotfiles() {
     CURRENT_PWD=$(pwd)
-    [ -z $1 ] && DOTFILES_DIR_PATH="$HOME/.local/share/dotfiles" || DOTFILES_DIR_PATH=$1
 
-    cd $DOTFILES_DIR_PATH \
+    cd $DOTFILES_SRC_LOCATION \
+        && git pull \
         && SKIP_PACKAGE_INSTALL=1 ./install \
         && cd $CURRENT_PWD
 }
