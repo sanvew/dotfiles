@@ -42,7 +42,7 @@ Plug('saadparwaiz1/cmp_luasnip')
 
 -- treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
---
+
 -- colorschemes
 Plug('ellisonleao/gruvbox.nvim')
 

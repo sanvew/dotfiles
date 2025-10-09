@@ -31,12 +31,3 @@ lspconfig.lua_ls.setup({
     capabilities = capabilities
 })
 
--- Python
--- lsp
-lspconfig.pyright.setup({
-    capabilities = capabilities
-})
-
--- linter and formatter
-lspconfig.ruff.setup({})
-
