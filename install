@@ -5,9 +5,9 @@ CONFIG="install.conf.yaml"
 DOTBOT_DIR=".dotbot"
 
 SYSTEM_TYPE="unknown"
-if [[ "$(uname -s)" == "Darwin" ]]; then
+if [ "$(uname -s)" == 'Darwin' ]; then
     SYSTEM_TYPE="macos"
-elif [[ -f /etc/os-release ]]; then
+elif [ -f '/etc/os-release' ]; then
     OS_ID=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
     case "${OS_ID}" in
         arch|artix) SYSTEM_TYPE="arch" ;;
@@ -16,12 +16,18 @@ elif [[ -f /etc/os-release ]]; then
 fi
 export SYSTEM_TYPE
 
+if [ -n "$MINIMAL" ]; then
+    [ ! -f "${BASEDIR}/MINIMAL_INSTALLATION" ] && touch "${BASEDIR}/MINIMAL_INSTALLATION"
+elif [ -f "${BASEDIR}/MINIMAL_INSTALLATION" ]; then
+    export MINIMAL=1
+fi
+
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
 
-(cd "${DOTBOT_DIR}" && git submodule update --init --recursive)
+git submodule update --init --recursive
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
     -d "${BASEDIR}" \
@@ -30,4 +36,5 @@ cd "${BASEDIR}"
     -p "${BASEDIR}/.dotbot-plugin/dotbot-sudo/sudo.py" \
     -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
     -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \
+    -p "${BASEDIR}/.dotbot-plugin/dotbot-apt/apt.py" \
     -c "${CONFIG}" "${@}"

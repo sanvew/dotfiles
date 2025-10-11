@@ -9,21 +9,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# Docker
-alias d='docker'
-alias dco='docker compose'
-jupyter() {
-    CONFIG_VOLUME=jupyter-config
-    IMAGE=jupyter/datascience-notebook
-    IMAGE_VERSION=2023-10-17
-
-    docker run --rm -p 8888:8888 \
-        -v $HOME/.ssh:/home/jovyan/.ssh \
-        --mount type=bind,source=$HOME/.gitconfig,target=/home/jovyan/.gitconfig \
-        -v $CONFIG_VOLUME:/home/jovyan/.jupyter \
-        -v $(pwd):/home/jovyan/work \
-        $@ $IMAGE:$IMAGE_VERSION
-}
+# TODO: move to default/common
 ngx() {
     [ -z $1 ] && port="8080:80" || port="$1:80"
     docker run \
@@ -33,21 +19,18 @@ ngx() {
         --name ngx_$(basename $(pwd)) \
         nginx:mainline-alpine
 }
+
+# TODO: move to minimal/common
 reload_dotfiles() {
     CURRENT_PWD=$(pwd)
 
     cd $DOTFILES_SRC_LOCATION \
-        && git pull \
+        && git pull --rebase \
         && SKIP_PACKAGE_INSTALL=1 ./install \
         && cd $CURRENT_PWD
 }
 
-# k8s
-alias k='kubectl'
-
 # misc
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias ccat="highlight --out-format=ansi --force"
-alias cls='clear'
 alias sorc='source $HOME/.bashrc'

@@ -4,9 +4,9 @@ Personal dotfiles managed by [dotbot](https://github.com/anishathalye/dotbot)
 
 ## Prerequisites
 ### Arch (*like*)
-Required packages (under root user):
+Required packages:
 ```shell
-pacman -Sy --needed sudo git base-devel
+sudo pacman -Sy --needed sudo git base-devel
 ```
 
 Install package manager for [aur](https://aur.archlinux.org/) packages: [yay](https://github.com/Jguer/yay)
@@ -20,6 +20,12 @@ Install [brew](https://brew.sh/)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+### Debian (*like*)
+Required packages (under root user):
+```shell
+pacman -Sy --needed sudo git base-devel
+```
+
 ## Bootstrap
 Repository cloning
 ```shell
@@ -28,15 +34,15 @@ git clone git@github.com:sanvew/dotfiles.git $HOME/.local/share/dotfiles
 
 Full system-based installation
 ```shell
-cd $HOME/.local/share/dotfiles && ./install
+cd $HOME/.local/share/dotfiles && ./install && cd
 ```
 
-Set "SKIP\_PACKAGE\_INSTALL" env var to skip package installation
+Skip package installation, files linking only
 ```shell
-cd $HOME/.local/share/dotfiles && SKIP_PACKAGE_INSTALL=1 ./install
+cd $HOME/.local/share/dotfiles && SKIP_PACKAGE_INSTALL=1 ./install && cd
 ```
 
 Minimal Debian/Ubuntu bootstrap
 ```shell
-cd $HOME/.local/share/dotfiles && DEBIAN_MINIMAL=1 ./install
+cd $HOME/.local/share/dotfiles && MINIMAL=1 ./install && cd
 ```

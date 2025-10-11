@@ -25,9 +25,18 @@ if [ "$color_prompt" = 1 ]; then
     FGRN="\[\033[32m\]" # foreground green
     FYEL="\[\033[33m\]" # foreground yellow
     FBLE="\[\033[34m\]" # foreground blue
-    PS1="$HC$FYEL[$RS$HC$FGRN\u@\h $HC$FBLE\w$HC$FYEL]$RS\$ "
+    FRED="\[\033[31m\]" # foreground red
+    if [ "$EUID" -eq 0 ]; then
+        PS1="$HC$FRED[\u@\h \w]$RS# "
+    else
+        PS1="$HC$FYEL[$RS$HC$FGRN\u@\h $HC$FBLE\w$HC$FYEL]$RS\$ "
+    fi
 else
-    PS1='[\u@\h \w]\$ '
+    if [ "$EUID" -eq 0 ]; then
+        PS1='[\u@\h \w]# '
+    else
+        PS1='[\u@\h \w]\$ '
+    fi
 fi
 unset color_prompt
 
@@ -66,7 +75,6 @@ fi
 ############### System specific settings ###############
 # system information
 KERNEL_NAME=$(uname -s)
-KERNEL_RELEASE=$(uname -r)
 
 #### macos ####
 if [ "$KERNEL_NAME" = 'Darwin' ]; then
@@ -85,17 +93,8 @@ fi
 if [ "$KERNEL_NAME" = 'Linux' ]; then
     # completion path
     BASH_COMPLETION_PATH="/usr/share/bash-completion/bash_completion"
-
-    # completion aliases
-    if [ -e /usr/share/bash-complete-alias/complete_alias ]; then
-        source /usr/share/bash-complete-alias/complete_alias
-        complete -F __start_kubectl k
-        complete -F _complete_alias d
-        complete -F _complete_alias dco
-    fi
 fi
 unset KERNEL_NAME
-unset KERNEL_RELEASE
 ############### System specific settings ###############
 
 ################# Common files sourcing ################
@@ -108,4 +107,3 @@ unset KERNEL_RELEASE
 # environment files
 [ -e "$HOME/.env" ] && source $HOME/.env
 ################# Common files sourcing ################
-

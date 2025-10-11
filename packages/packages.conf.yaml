@@ -9,7 +9,7 @@
       - includes:
           .: packages/arch/packages.conf.yaml
 - if:
-    cond: '[ -n "$DEBIAN_MINIMAL" ] && [ "$SYSTEM_TYPE" = "debian" ]'
+    cond: '[ -n "$MINIMAL" ] && [ "$SYSTEM_TYPE" = "debian" ]'
     met:
       - includes:
           .: packages/debian/minimal.conf.yaml

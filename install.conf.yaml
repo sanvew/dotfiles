@@ -3,12 +3,13 @@
     cond: '[ -z "$SKIP_PACKAGE_INSTALL" ]'
     met:
       - includes:
-        .: packages/packages.conf.yaml
+          .: packages/packages.conf.yaml
     unmet:
       - shell:
         - echo Skipping package installation!
 
 # config files linking
+# common config among all system installation
 - includes:
     .: ssh/ssh.conf.yaml
 - includes:
@@ -16,11 +17,9 @@
 - includes:
     .: bash/bash.conf.yaml
 - if:
-    cond: '[ -n "$DEBIAN_MINIMAL" ]'
+    # not minimal or minimal config
+    cond: '[ -z "$MINIMAL" ]'
     met:
-      - shell:
-        - echo Minimal debian installation!
-    unmet:
       - includes:
           .: script/script.conf.yaml
       - includes:

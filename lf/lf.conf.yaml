@@ -7,7 +7,22 @@
     ~/.config/lf:
       create: true
       glob: true
-      path: './lf/**'
-      exclude: [ '**/lf.conf.yaml' ]
+      path: './lf/common/**'
 
+- if:
+    cond: '[ -n "$MINIMAL" ]'
+    met:
+      - link:
+          ~/.config/lf:
+            force: true
+            create: true
+            glob: true
+            path: './lf/minimal/**'
+    unmet:
+      - link:
+          ~/.config/lf:
+            force: true
+            create: true
+            glob: true
+            path: './lf/default/**'
 
