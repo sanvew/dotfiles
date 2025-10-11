@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
-
 set -e
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR=".dotbot"
 
-KERNEL_NAME=$(uname -s)
-KERNEL_RELEASE=$(uname -r)
+SYSTEM_TYPE="unknown"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    SYSTEM_TYPE="macos"
+elif [[ -f /etc/os-release ]]; then
+    OS_ID=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
+    case "${OS_ID}" in
+        arch|artix) SYSTEM_TYPE="arch" ;;
+        debian|ubuntu) SYSTEM_TYPE="debian" ;;
+    esac
+fi
+export SYSTEM_TYPE
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,10 +24,10 @@ cd "${BASEDIR}"
 (cd "${DOTBOT_DIR}" && git submodule update --init --recursive)
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
-  -d "${BASEDIR}" \
-  -p "${BASEDIR}/.dotbot-plugin/dotbot-include/include.py" \
-  -p "${BASEDIR}/.dotbot-plugin/dotbot-if/if.py" \
-  -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
-  -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \
-  -c "${CONFIG}" "${@}"
-
+    -d "${BASEDIR}" \
+    -p "${BASEDIR}/.dotbot-plugin/dotbot-includes/includes.py" \
+    -p "${BASEDIR}/.dotbot-plugin/dotbot-if/if.py" \
+    -p "${BASEDIR}/.dotbot-plugin/dotbot-sudo/sudo.py" \
+    -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
+    -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \
+    -c "${CONFIG}" "${@}"

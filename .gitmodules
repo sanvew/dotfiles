@@ -1,15 +1,18 @@
 [submodule "dotbot"]
 	path = .dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "dotbot-include"]
-	path = .dotbot-plugin/dotbot-include
-	url = https://gitlab.com/gnfzdz/dotbot-include.git
+[submodule "dotbot-includes"]
+	path = .dotbot-plugin/dotbot-includes
+	url = https://github.com/vanduc2514/dotbot-includes.git
+[submodule "dotbot-if"]
+	path = .dotbot-plugin/dotbot-if
+	url = https://github.com/wonderbeyond/dotbot-if.git
 [submodule "dotbot-brew"]
 	path = .dotbot-plugin/dotbot-brew
 	url = https://github.com/d12frosted/dotbot-brew.git
 [submodule "dotbot-yay"]
 	path = .dotbot-plugin/dotbot-yay
 	url = https://github.com/oxson/dotbot-yay
-[submodule "dotbot-if"]
-	path = .dotbot-plugin/dotbot-if
-	url = https://github.com/wonderbeyond/dotbot-if.git
+[submodule "dotbot-sudo"]
+	path = .dotbot-plugin/dotbot-sudo
+	url = https://github.com/DrDynamic/dotbot-sudo.git

@@ -1,28 +1,31 @@
-- defaults:
-    include:
-      isolated: True
-
 # packages installation
 - if:
     cond: '[ -z "$SKIP_PACKAGE_INSTALL" ]'
     met:
-      - if:
-        - cond: 'command -v yay'
-          met:
-            - include: packages/yay.conf.yaml
-        - cond: 'command -v brew'
-          met:
-            - include: packages/brew.conf.yaml
+      - includes:
+        .: packages/packages.conf.yaml
     unmet:
       - shell:
         - echo Skipping package installation!
 
 # config files linking
-- include: ssh/ssh.conf.yaml
-- include: bash/bash.conf.yaml
-- include: script/script.conf.yaml
-- include: lf/lf.conf.yaml
-- include: nvim/nvim.conf.yaml
-- include: tmux/tmux.conf.yaml
-- include: ideavim/ideavim.conf.yaml
-
+- includes:
+    .: ssh/ssh.conf.yaml
+- includes:
+    .: lf/lf.conf.yaml
+- includes:
+    .: bash/bash.conf.yaml
+- if:
+    cond: '[ -n "$DEBIAN_MINIMAL" ]'
+    met:
+      - shell:
+        - echo Minimal debian installation!
+    unmet:
+      - includes:
+          .: script/script.conf.yaml
+      - includes:
+          .: tmux/tmux.conf.yaml
+      - includes:
+          .: nvim/nvim.conf.yaml
+      - includes:
+          .: ideavim/ideavim.conf.yaml

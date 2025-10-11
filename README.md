@@ -36,3 +36,7 @@ Set "SKIP\_PACKAGE\_INSTALL" env var to skip package installation
 cd $HOME/.local/share/dotfiles && SKIP_PACKAGE_INSTALL=1 ./install
 ```
 
+Minimal Debian/Ubuntu bootstrap
+```shell
+cd $HOME/.local/share/dotfiles && DEBIAN_MINIMAL=1 ./install
+```

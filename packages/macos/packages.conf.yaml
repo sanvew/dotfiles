@@ -1,0 +1,2 @@
+- brewfile:
+    - packages/macos/Brewfile
