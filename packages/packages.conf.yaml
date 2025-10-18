@@ -1,15 +1,15 @@
-- if:
-    cond: '[ "$SYSTEM_TYPE" = "macos" ]'
-    met:
+- conditional:
+    if: '[ "$SYSTEM_TYPE" = "macos" ]'
+    then:
       - includes:
           .: packages/macos/packages.conf.yaml
-- if:
-    cond: '[ "$SYSTEM_TYPE" = "arch" ]'
-    met:
+- conditional:
+    if: '[ "$SYSTEM_TYPE" = "arch" ]'
+    then:
       - includes:
           .: packages/arch/packages.conf.yaml
-- if:
-    cond: '[ -n "$MINIMAL" ] && [ "$SYSTEM_TYPE" = "debian" ]'
-    met:
+- conditional:
+    if: '[ -n "$MINIMAL" ] && [ "$SYSTEM_TYPE" = "debian" ]'
+    then:
       - includes:
           .: packages/debian/minimal.conf.yaml

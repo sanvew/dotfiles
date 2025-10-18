@@ -9,7 +9,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# TODO: move to default/common
+# TODO: move to script/default
 ngx() {
     [ -z $1 ] && port="8080:80" || port="$1:80"
     docker run \
@@ -20,7 +20,7 @@ ngx() {
         nginx:mainline-alpine
 }
 
-# TODO: move to minimal/common
+# TODO: move to script/minimal
 reload_dotfiles() {
     CURRENT_PWD=$(pwd)
 

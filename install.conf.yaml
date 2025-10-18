@@ -1,10 +1,10 @@
 # packages installation
-- if:
-    cond: '[ -z "$SKIP_PACKAGE_INSTALL" ]'
-    met:
+- conditional:
+    if: '[ -z "$SKIP_PACKAGE_INSTALL" ]'
+    then:
       - includes:
           .: packages/packages.conf.yaml
-    unmet:
+    else:
       - shell:
         - echo Skipping package installation!
 
@@ -16,10 +16,10 @@
     .: lf/lf.conf.yaml
 - includes:
     .: bash/bash.conf.yaml
-- if:
+- conditional:
+    if: '[ -z "$MINIMAL" ]'
     # not minimal or minimal config
-    cond: '[ -z "$MINIMAL" ]'
-    met:
+    then:
       - includes:
           .: script/script.conf.yaml
       - includes:

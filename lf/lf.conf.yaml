@@ -9,16 +9,16 @@
       glob: true
       path: './lf/common/**'
 
-- if:
-    cond: '[ -n "$MINIMAL" ]'
-    met:
+- conditional:
+    if: '[ -n "$MINIMAL" ]'
+    then:
       - link:
           ~/.config/lf:
             force: true
             create: true
             glob: true
             path: './lf/minimal/**'
-    unmet:
+    else:
       - link:
           ~/.config/lf:
             force: true

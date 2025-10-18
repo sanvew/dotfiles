@@ -16,23 +16,22 @@ elif [ -f '/etc/os-release' ]; then
 fi
 export SYSTEM_TYPE
 
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 if [ -n "$MINIMAL" ]; then
     [ ! -f "${BASEDIR}/MINIMAL_INSTALLATION" ] && touch "${BASEDIR}/MINIMAL_INSTALLATION"
 elif [ -f "${BASEDIR}/MINIMAL_INSTALLATION" ]; then
     export MINIMAL=1
 fi
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 cd "${BASEDIR}"
 
 git submodule update --init --recursive
-
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
     -d "${BASEDIR}" \
     -p "${BASEDIR}/.dotbot-plugin/dotbot-includes/includes.py" \
-    -p "${BASEDIR}/.dotbot-plugin/dotbot-if/if.py" \
+    --plugin-dir "${BASEDIR}/.dotbot-plugin/dotbot-conditional" \
     -p "${BASEDIR}/.dotbot-plugin/dotbot-sudo/sudo.py" \
     -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
     -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \

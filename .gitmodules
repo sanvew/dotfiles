@@ -4,9 +4,9 @@
 [submodule "dotbot-includes"]
 	path = .dotbot-plugin/dotbot-includes
 	url = https://github.com/vanduc2514/dotbot-includes.git
-[submodule "dotbot-if"]
-	path = .dotbot-plugin/dotbot-if
-	url = https://github.com/wonderbeyond/dotbot-if.git
+[submodule "dotbot-conditional"]
+	path = .dotbot-plugin/dotbot-conditional
+	url = https://gitlab.com/gnfzdz/dotbot-conditional.git
 [submodule "dotbot-brew"]
 	path = .dotbot-plugin/dotbot-brew
 	url = https://github.com/d12frosted/dotbot-brew.git
