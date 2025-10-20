@@ -1,9 +1,3 @@
-# Tmux
-alias tm="tmux"
-alias tmkses="tmux kill-session"
-alias tmkser="tmux kill-server"
-alias tmls="tmux ls"
-
 # Vim
 alias vi="nvim"
 alias vim="nvim"
@@ -27,6 +21,7 @@ reload_dotfiles() {
     cd $DOTFILES_SRC_LOCATION \
         && git pull --rebase \
         && SKIP_PACKAGE_INSTALL=1 ./install \
+        && . ~/.bashrc \
         && cd $CURRENT_PWD
 }
 

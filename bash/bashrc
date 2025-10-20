@@ -103,7 +103,4 @@ unset KERNEL_NAME
 
 # aliases
 [ -e "$HOME/.bash_aliases" ] && source $HOME/.bash_aliases
-
-# environment files
-[ -e "$HOME/.env" ] && source $HOME/.env
 ################# Common files sourcing ################
