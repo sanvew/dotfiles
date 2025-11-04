@@ -10,7 +10,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 # dotfiles sources location
-export DOTFILES_SRC_LOCATION="$XDG_DATA_HOME/dotfiles"
+export DOTFILES_SRC_LOCATION="$HOME/.local/src/dotfiles"
 
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
