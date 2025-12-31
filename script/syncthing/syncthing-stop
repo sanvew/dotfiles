@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DOCKER_COMPOSE_PATH="$XDG_CONFIG_HOME/syncthing/docker-compose.yaml"
 
