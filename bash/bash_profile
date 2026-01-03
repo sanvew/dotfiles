@@ -2,23 +2,28 @@
 export EDITOR=nvim
 
 # custom programs and scripts
-export PATH=$PATH:$HOME/.local/bin
+export PATH="$PATH":"$HOME"/.local/bin
 
 # XDG directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_CACHE_HOME="$HOME"/.cache
+export XDG_DATA_HOME="$HOME"/.local/share
 
 # dotfiles sources location
-export DOTFILES_SRC_LOCATION="$HOME/.local/src/dotfiles"
+export DOTFILES_SRC_LOCATION="$HOME"/.local/src/dotfiles
 
+# openai
+export CODEX_HOME="$XDG_CONFIG_HOME"/codex
+# clojure
+export LEIN_HOME="$XDG_DATA_HOME"/lein
 # rust
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # go
-export GOPATH="$XDG_DATA_HOME/go"
-export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+export GOPATH="$XDG_DATA_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 # pnpm
-export PNPM_HOME="$XDG_DATA_HOME/pnpm"
-export PATH=$PATH:$PNPM_HOME
+export PNPM_HOME="$XDG_DATA_HOME"/pnpm
+export PATH=$PATH:"$PNPM_HOME"
 
 [ -f ~/.bashrc ] && . ~/.bashrc

@@ -1,6 +1,7 @@
 # Settings
 set icons
 set shell bash
+set shellopts '-eu'
 set previewer ctpv
 set cleaner ctpvclear
 &ctpv -s $id
@@ -8,16 +9,12 @@ set cleaner ctpvclear
 
 set ifs "\n"
 set filesep "\n"
-
 set scrolloff 10
 
 map <enter> shell
 
 map x $$f
 map X !$f
-
-map o &mimeopen $f
-map O $mimeopen --ask $f
 
 # Commands
 cmd open ${{
@@ -26,10 +23,17 @@ cmd open ${{
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
+map o open $f
 
 %mkdir -p ~/.trash
-cmd trash %set -f; mv $fx ~/.trash
-
+cmd trash ${{
+    mkdir -p ~/.trash
+    if [ -z "$fs" ]; then
+        mv "$f" ~/.trash
+    else
+        IFS="$(printf '\n\t')"; mv $fs ~/.trash
+    fi
+}}
 map <delete> trash
 
 cmd extract ${{
