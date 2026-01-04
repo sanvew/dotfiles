@@ -1,5 +1,9 @@
 #!/bin/sh
 
 DOCKER_COMPOSE_PATH="$XDG_CONFIG_HOME/syncthing/docker-compose.yaml"
+RUNTIME="docker"
+if [ -x "$(command -v podman)" ]; then
+    RUNTIME="podman"
+fi
 
-docker compose -f $DOCKER_COMPOSE_PATH down
+$RUNTIME compose -f $DOCKER_COMPOSE_PATH down

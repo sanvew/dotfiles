@@ -1,10 +1,15 @@
 #!/bin/sh
 
 DOCKER_COMPOSE_PATH="$XDG_CONFIG_HOME/syncthing/docker-compose.yaml"
+RUNTIME="docker"
+if [ -x "$(command -v podman)" ]; then
+    RUNTIME="podman"
+    PODMAN_ARGS="--in-pod=false"
+fi
 
 mkdir -p $XDG_CONFIG_HOME/syncthing
 mkdir -p $HOME/Documents/syncthing
 
 export HOST_UID=$(id -u) HOST_GID=$(id -g)
-docker compose -f $DOCKER_COMPOSE_PATH up -d
+$RUNTIME compose $PODMAN_ARGS -f $DOCKER_COMPOSE_PATH up -d
 

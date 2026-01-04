@@ -5,7 +5,8 @@ services:
   syncthing:
     image: syncthing/syncthing:1.28
     container_name: syncthing
-    restart: always
+    userns_mode: keep-id
+    restart: unless-stopped
     ports:
       - 8384:8384
       - 22000:22000/tcp
