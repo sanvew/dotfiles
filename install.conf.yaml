@@ -1,6 +1,6 @@
 # packages installation
 - conditional:
-    if: '[ -z "$SKIP_PACKAGE_INSTALL" ]'
+    if: '[ -z "$SKIP_PKG" ]'
     then:
       - includes:
           .: packages/packages.conf.yaml

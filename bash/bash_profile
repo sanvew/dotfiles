@@ -2,15 +2,15 @@
 export EDITOR=nvim
 
 # custom programs and scripts
-export PATH="$PATH":"$HOME"/.local/bin
+export PATH="$PATH":~/.local/bin
 
 # XDG directories
-export XDG_CONFIG_HOME="$HOME"/.config
-export XDG_CACHE_HOME="$HOME"/.cache
-export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
 
 # dotfiles sources location
-export DOTFILES_SRC_LOCATION="$HOME"/.local/src/dotfiles
+export DOTFILES_SRC_DIR=~/.local/src/dotfiles
 
 # openai
 export CODEX_HOME="$XDG_CONFIG_HOME"/codex

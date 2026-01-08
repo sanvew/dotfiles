@@ -18,11 +18,11 @@ ngx() {
 reload_dotfiles() {
     CURRENT_PWD=$(pwd)
 
-    cd $DOTFILES_SRC_LOCATION \
+    cd $DOTFILES_SRC_DIR \
         && git pull --rebase \
-        && SKIP_PACKAGE_INSTALL=1 ./install \
+        && SKIP_PKG=1 ./install \
         && . ~/.bashrc \
-        && cd $CURRENT_PWD
+        cd $CURRENT_PWD
 }
 
 # misc

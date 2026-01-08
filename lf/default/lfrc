@@ -1,4 +1,3 @@
-# Settings
 set icons
 set shell bash
 set shellopts '-eu'
@@ -11,20 +10,24 @@ set ifs "\n"
 set filesep "\n"
 set scrolloff 10
 
+# Keybindings
 map <enter> shell
-
 map x $$f
 map X !$f
+map R reload
 
-# Commands
+# file opener settings
 cmd open ${{
     case $(file --mime-type $f -b) in
-        text/*) $EDITOR $fx;;
-        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+        text/*) $EDITOR $fx ;;
+        application/pdf) setsid zathura $fx 2>&1 >/dev/null ;;
+        image/*) setsid nsxiv $fx 2>&1 >/dev/null ;;
+        *) for f in $fx; do setsid $OPENER $f 2>&1 >/dev/null & done;;
     esac
 }}
 map o open $f
 
+# .trash/ settings
 %mkdir -p ~/.trash
 cmd trash ${{
     mkdir -p ~/.trash
@@ -64,4 +67,3 @@ cmd zip ${{
     rm -rf $1
 }}
 
-map R reload
