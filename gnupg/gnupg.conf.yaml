@@ -1,0 +1,10 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      backup: true
+
+- link:
+    ~/.gnupg/common.conf: './gnupg/common.conf'
+    ~/.gnupg/gpg-agent.conf: './gnupg/gpg-agent.conf'
+    ~/.local/bin/pinentry: './gnupg/pinentry'

@@ -16,6 +16,8 @@
     .: lf/lf.conf.yaml
 - includes:
     .: bash/bash.conf.yaml
+- includes:
+    .: gnupg/gnupg.conf.yaml
 - conditional:
     if: '[ -z "$MINIMAL" ]'
     # not minimal or minimal config
