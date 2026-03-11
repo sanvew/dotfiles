@@ -2,7 +2,7 @@
 export EDITOR=nvim
 
 # custom programs and scripts
-export PATH="$PATH":~/.local/bin:~/.local/opt/bin
+export PATH="$PATH":~/.local/bin
 
 # XDG directories
 export XDG_CONFIG_HOME=~/.config
@@ -25,7 +25,5 @@ export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 # pnpm
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export PATH=$PATH:"$PNPM_HOME"
-# minikube
-export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 
 [ -f ~/.bashrc ] && . ~/.bashrc

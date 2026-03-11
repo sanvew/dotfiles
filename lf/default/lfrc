@@ -18,10 +18,11 @@ map R reload
 
 # file opener settings
 cmd open ${{
-    case $(file --mime-type $f -b) in
+    case $(file --mime-type $f -Lb) in
         text/*) $EDITOR $fx ;;
         application/pdf) setsid zathura $fx 2>&1 >/dev/null ;;
         image/*) setsid nsxiv $fx 2>&1 >/dev/null ;;
+        video/*) setsid mpv $fx 2>&1 >/dev/null ;;
         *) for f in $fx; do setsid $OPENER $f 2>&1 >/dev/null & done;;
     esac
 }}
