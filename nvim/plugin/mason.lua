@@ -11,9 +11,8 @@ if not mason_lspconfig_status_ok then
 end
 
 mason_lspconfig.setup({
-    ensure_installed = {
-        'lua_ls'
-    }
+    ensure_installed = { 'lua_ls', 'stylua' },
+    automatic_installation = true,
 })
 
 local mason_null_ls_status_ok, mason_null_ls = pcall(require, 'mason-null-ls')
@@ -21,9 +20,5 @@ if not mason_null_ls_status_ok then
     return
 end
 
-mason_null_ls.setup({
-    ensure_installed = {
-        'stylua'
-    }
-})
+mason_null_ls.setup()
 

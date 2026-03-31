@@ -11,7 +11,6 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -27,7 +26,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Lua
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
     capabilities = capabilities
 })
-
