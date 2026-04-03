@@ -3,4 +3,5 @@
       quiet: false
 - shell:
   - ./install-pkg.sh
+  - ./install-lf.sh
 

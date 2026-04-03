@@ -1,0 +1,69 @@
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+    *) return;;
+esac
+
+# history preferences
+HISTCONTROL=ignoreboth
+HISTSIZE=-1
+HISTFILESIZE=-1
+shopt -s histappend
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+  *-256color) color_prompt=1;;
+esac
+
+if [ "$color_prompt" = 1 ]; then
+  RS="\[\033[0m\]"    # reset
+  HC="\[\033[1m\]"    # hicolor
+  FGRN="\[\033[32m\]" # foreground green
+  FYEL="\[\033[33m\]" # foreground yellow
+  FBLE="\[\033[34m\]" # foreground blue
+  FRED="\[\033[31m\]" # foreground red
+  if [ "$EUID" -eq 0 ]; then
+    PS1="$HC$FRED[\u@\h \w]$RS# "
+  else
+    PS1="$HC$FYEL[$RS$HC$FGRN\u@\h $HC$FBLE\w$HC$FYEL]$RS\$ "
+  fi
+else
+  if [ "$EUID" -eq 0 ]; then
+    PS1='[\u@\h \w]# '
+  else
+    PS1='[\u@\h \w]\$ '
+  fi
+fi
+unset color_prompt
+
+export GPG_TTY=$(tty)
+
+### git bash prompt ###
+BASH_GIT_PROMPT_PATH="$HOME/.local/src/bash-git-prompt"
+source_git-bash-prompt() {
+    GIT_PROMPT_ONLY_IN_REPO=1
+    GIT_PROMPT_THEME=Single_line
+    source $BASH_GIT_PROMPT_PATH/gitprompt.sh
+}
+
+clone_git-bash-prompt() {
+    git clone https://github.com/magicmonty/bash-git-prompt.git $BASH_GIT_PROMPT_PATH --depth=1
+}
+
+if [ -f "$BASH_GIT_PROMPT_PATH/gitprompt.sh" ]; then
+  source_git-bash-prompt
+else
+  clone_git-bash-prompt; source_git-bash-prompt
+fi
+
+#### lf ####
+LFCD="$XDG_CONFIG_HOME/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+  source "$LFCD"; bind '"\C-o":"lfcd\C-m"'
+fi
+
+[ -e "$HOME/.bash_aliases" ] && source $HOME/.bash_aliases

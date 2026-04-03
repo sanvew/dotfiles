@@ -1,0 +1,10 @@
+- link:
+    ~/:
+      glob: true
+      create: true
+      relink: true
+      backup: true
+      path: './**'
+      prefix: '.'
+      exclude: [ '**/bash.conf.yaml' ]
+

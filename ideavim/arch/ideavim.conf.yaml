@@ -1,0 +1,7 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      backup: true
+- link:
+    ~/.config/ideavim/ideavimrc: 'ideavimrc'

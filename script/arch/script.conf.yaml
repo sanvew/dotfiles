@@ -1,0 +1,16 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      backup: true
+# reload-dotfiles
+- link:
+    ~/.local/bin/reload-dotfiles: './reload-dotfiles'
+# syncthing
+- link:
+    ~/.local/bin:
+      glob: true
+      path: './syncthing/**'
+      exclude: [ '**/docker-compose.yaml' ]
+    ~/.config/syncthing/docker-compose.yaml: './syncthing/docker-compose.yaml'
+

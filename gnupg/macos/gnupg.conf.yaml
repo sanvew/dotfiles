@@ -1,0 +1,8 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      backup: true
+- link:
+    ~/.gnupg/common.conf: './common.conf'
+    ~/.gnupg/gpg-agent.conf: './gpg-agent.conf'

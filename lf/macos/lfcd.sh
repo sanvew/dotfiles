@@ -1,0 +1,1 @@
+../arch/lfcd.sh

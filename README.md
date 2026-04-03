@@ -1,6 +1,5 @@
 # dotfiles
-
-Personal dotfiles managed by [dotbot](https://github.com/anishathalye/dotbot)
+Personal dotfiles managed with [dotbot](https://github.com/anishathalye/dotbot)
 
 ## Prerequisites
 ### Arch (*like*)
@@ -21,28 +20,35 @@ Install [brew](https://brew.sh/)
 ```
 
 ### Debian (*like*)
+Supports only **minimal** installation
 Required packages (under root user):
 ```shell
-pacman -Sy --needed sudo git base-devel
+sudo apt install -y git
 ```
 
 ## Bootstrap
 Repository cloning
 ```shell
-git clone git@github.com:sanvew/dotfiles.git $HOME/.local/share/dotfiles
+git clone git@github.com:sanvew/dotfiles.git $HOME/.local/src/dotfiles
 ```
 
 Full system-based installation
 ```shell
-cd $HOME/.local/share/dotfiles && ./install && cd
+cd $HOME/.local/src/dotfiles && ./install
 ```
 
 Skip package installation, files linking only
 ```shell
-cd $HOME/.local/share/dotfiles && SKIP_PACKAGE_INSTALL=1 ./install && cd
+cd $HOME/.local/src/dotfiles && ./install --skip-pkg
 ```
 
 Minimal Debian/Ubuntu bootstrap
 ```shell
-cd $HOME/.local/share/dotfiles && MINIMAL=1 ./install && cd
+cd $HOME/.local/src/dotfiles && ./install --minimal
 ```
+
+Configuration update and reload
+```shell
+reload-dotfiles
+```
+

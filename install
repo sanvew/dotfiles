@@ -3,39 +3,77 @@
 set -e
 
 CONFIG="install.conf.yaml"
+BASEDIR="$(cd "$(dirname "$0")" && pwd -P)"
 DOTBOT_DIR=".dotbot"
+DOTBOT_BIN="bin/dotbot"
+MODULE_CONFIG="
+  bash
+  gnupg
+  ideavim
+  lf
+  nvim
+  packages
+  script
+  ssh
+  tmux
+"
 
-SYSTEM_TYPE="unknown"
-if [ "$(uname -s)" == 'Darwin' ]; then
-    SYSTEM_TYPE="macos"
-elif [ -f '/etc/os-release' ]; then
+detect_system() {
+  if [ "$(uname -s)" == 'Darwin' ]; then
+    printf "macos"
+  elif [ -f '/etc/os-release' ]; then
     OS_ID=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
     case "${OS_ID}" in
-        arch|artix) SYSTEM_TYPE="arch" ;;
-        debian|ubuntu) SYSTEM_TYPE="debian" ;;
+      arch|artix) printf "arch" ;;
+      debian|ubuntu) printf "debian" ;;
     esac
-fi
-export SYSTEM_TYPE
+    unset OS_ID
+  else
+    printf "unknown"
+  fi
+}
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+is_minimal_installation() {
+  basedir=$1; shift
+  if [ -f "${basedir}/MINIMAL_INSTALLATION" ]; then
+    printf 1; return 0
+  fi
+  for arg in "$@"; do
+    if [ "$arg" = "--minimal" ]; then
+      touch "${basedir}"/MINIMAL_INSTALLATION
+      printf 1; return 0
+    fi
+  done
+}
 
-if [ -n "$MINIMAL" ]; then
-    [ ! -f "${BASEDIR}/MINIMAL_INSTALLATION" ] && touch "${BASEDIR}/MINIMAL_INSTALLATION"
-elif [ -f "${BASEDIR}/MINIMAL_INSTALLATION" ]; then
-    export MINIMAL=1
-fi
+is_skip_package_installation() {
+  for arg in "$@"; do
+    if [ "$arg" = "--skip-pkg" ]; then
+      printf 1; return 0
+    fi
+  done
+}
+
+install_modules() {
+  dotbot_bin=$1; base_dir=$2; modules=$3; shift 3
+  system=$(detect_system)
+  is_min=$(is_minimal_installation "$base_dir" "$@")
+  is_skip_pkg=$(is_skip_package_installation "$@")
+  for config in $modules; do
+    [ "$is_skip_pkg" = "1" ] && [ $config = "packages" ] && continue
+    if [ "$is_min" = "1" ]; then
+      sys_config_dir="$base_dir/${config}/$system-minimal"
+    else
+      sys_config_dir="$base_dir/$config/$system"
+    fi
+    sys_config="$sys_config_dir/$config".conf.yaml
+    if [ -f "$sys_config" ]; then
+      $dotbot_bin -d $sys_config_dir -c $sys_config
+    fi
+  done
+}
+
 
 cd "${BASEDIR}"
-
 git submodule update --init --recursive
-
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
-    -d "${BASEDIR}" \
-    -p "${BASEDIR}/.dotbot-plugin/dotbot-includes/includes.py" \
-    --plugin-dir "${BASEDIR}/.dotbot-plugin/dotbot-conditional" \
-    -p "${BASEDIR}/.dotbot-plugin/dotbot-sudo/sudo.py" \
-    -p "${BASEDIR}/.dotbot-plugin/dotbot-yay/yay.py" \
-    -p "${BASEDIR}/.dotbot-plugin/dotbot-brew/brew.py" \
-    -p "${BASEDIR}/.dotbot-plugin/dotbot-apt/apt.py" \
-    -c "${CONFIG}" "${@}"
+install_modules "$BASEDIR/$DOTBOT_DIR/$DOTBOT_BIN" "$BASEDIR" "$MODULE_CONFIG" "$@"

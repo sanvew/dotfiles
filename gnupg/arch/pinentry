@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case $PINENTRY_CMD in
+    gtk) exec pinentry-gtk "$@" ;;
+    *) exec pinentry-tty "$@" ;;
+esac

@@ -1,0 +1,8 @@
+# nim (neovim)
+alias vi="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+# misc
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias bc='bc -l'

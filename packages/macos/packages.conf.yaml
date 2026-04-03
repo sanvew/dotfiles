@@ -1,2 +1,1 @@
-- brewfile:
-    - packages/macos/Brewfile
+../arch/packages.conf.yaml

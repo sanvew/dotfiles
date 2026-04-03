@@ -1,0 +1,8 @@
+#!/bin/sh
+
+CURRENT_PWD=$(pwd)
+cd $DOTFILES_SRC_DIR \
+  && git pull --rebase \
+  && ./install --skip-pkg \
+  && . ~/.bashrc
+cd $CURRENT_PWD
