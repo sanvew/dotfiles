@@ -1,0 +1,9 @@
+term = xterm-256color
+theme = iTerm2 Default
+# font
+font-family = Hack Nerd Font Mono Regular
+font-size = 13
+# cursor
+shell-integration-features = no-cursor
+cursor-style = block
+
