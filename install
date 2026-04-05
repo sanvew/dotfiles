@@ -20,7 +20,7 @@ MODULE_CONFIG="
 "
 
 detect_system() {
-  if [ "$(uname -s)" == 'Darwin' ]; then
+  if [ "$(uname -s)" = 'Darwin' ]; then
     printf "macos"
   elif [ -f '/etc/os-release' ]; then
     OS_ID=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
@@ -69,7 +69,7 @@ install_modules() {
     fi
     sys_config="$sys_config_dir/$config".conf.yaml
     if [ -f "$sys_config" ]; then
-      $dotbot_bin -d $sys_config_dir -c $sys_config
+      "$dotbot_bin" -d "$sys_config_dir" -c "$sys_config" || true
     fi
   done
 }
