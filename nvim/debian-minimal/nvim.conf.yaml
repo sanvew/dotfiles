@@ -1,12 +1,9 @@
-- defaults:
-    link:
-      create: true
-      relink: true
-      backup: true
 - link:
     ~/.config/nvim:
       glob: true
+      create: true
+      relink: true
+      backup: true
       path: './**'
       exclude: [ '**/nvim.conf.yaml', '**/luarc.json' ]
-    ~/.config/nvim/.luarc.json: './luarc.json'
 
