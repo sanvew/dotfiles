@@ -15,7 +15,6 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
 -- basic plugins
 Plug('nvim-lua/plenary.nvim') -- lua util functions
-Plug('tpope/vim-fugitive') -- git preimer plugin
 Plug('lewis6991/gitsigns.nvim') -- git hunks
 Plug('stevearc/oil.nvim') -- buffer like file explorer
 Plug('nvim-tree/nvim-web-devicons') -- file icons powered by nerd-fonts

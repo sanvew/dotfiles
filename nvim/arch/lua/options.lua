@@ -8,8 +8,9 @@ vim.opt.wrap = false
 vim.opt.linebreak = true
 
 -- tabs
-local tab_size = 4
+local tab_size = 2
 vim.opt.tabstop = tab_size
+vim.opt.softtabstop = tab_size
 vim.opt.shiftwidth = tab_size
 vim.opt.expandtab = true -- inserting space whenever tab pressed
 
