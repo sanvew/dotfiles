@@ -9,6 +9,7 @@ DOTBOT_BIN="bin/dotbot"
 MODULE_CONFIG="
   bash
   ghostty
+  git
   gnupg
   ideavim
   lf

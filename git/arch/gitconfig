@@ -1,0 +1,7 @@
+[user]
+	email = sanvew@protonmail.com
+	name = sanvew
+[alias]
+	tree = log --graph --date=short --decorate --abbrev-commit --all --pretty=format:'%C(auto)%h %Cgreen%ad %Cblue%an%Creset %s %C(yellow)%d%Creset'
+[init]
+	defaultBranch = main
