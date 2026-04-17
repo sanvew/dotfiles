@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+brew update
+brew upgrade
+for cask in $(brew list --casks); do
+  brew upgrade "$cask";
+done

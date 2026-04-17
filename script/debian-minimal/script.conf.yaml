@@ -3,7 +3,6 @@
       create: true
       relink: true
       backup: true
-# reload-dotfiles
 - link:
     ~/.local/bin/reload-dotfiles: './reload-dotfiles'
 
