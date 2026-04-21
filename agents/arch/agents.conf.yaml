@@ -1,0 +1,11 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+      backup: true
+- link:
+    ~/.config/codex/skills:
+      glob: true
+      path: './skills/*'
+

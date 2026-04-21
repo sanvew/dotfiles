@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shell Script"
+  short_description: "Write, harden, and debug portable POSIX shell scripts."
+  default_prompt: "Use this skill to design, implement, and troubleshoot robust `/bin/sh` scripts with portable, POSIX-compliant patterns."

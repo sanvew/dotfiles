@@ -1,12 +1,13 @@
 #!/bin/sh
 
-set -e
+set -eu
 
 CONFIG="install.conf.yaml"
 BASEDIR="$(cd "$(dirname "$0")" && pwd -P)"
 DOTBOT_DIR=".dotbot"
 DOTBOT_BIN="bin/dotbot"
 MODULE_CONFIG="
+  agents
   bash
   ghostty
   git
@@ -19,6 +20,17 @@ MODULE_CONFIG="
   ssh
   tmux
 "
+
+usage() {
+  cat <<EOF
+Usage: ./install [--minimal] [--skip-pkg] [-h|--help]
+
+Options:
+  --minimal    Enable minimal installation mode.
+  --skip-pkg   Skip package installation.
+  -h, --help   Show this help message and exit.
+EOF
+}
 
 detect_system() {
   if [ "$(uname -s)" = 'Darwin' ]; then
