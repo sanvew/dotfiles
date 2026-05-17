@@ -3,7 +3,7 @@ version: "3"
 
 services:
   syncthing:
-    image: syncthing/syncthing:1.28
+    image: syncthing/syncthing:2.0.16
     container_name: syncthing
     userns_mode: keep-id
     restart: unless-stopped

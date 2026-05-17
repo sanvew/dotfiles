@@ -8,4 +8,8 @@
     ~/.config/codex/skills:
       glob: true
       path: './skills/*'
+- link:
+    ~/.config/claude/skills:
+      glob: true
+      path: './skills/*'
 
