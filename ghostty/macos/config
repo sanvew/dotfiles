@@ -6,4 +6,6 @@ font-size = 13
 # cursor
 shell-integration-features = no-cursor
 cursor-style = block
-
+# macos settings
+macos-option-as-alt = true
+macos-icon = microchip
