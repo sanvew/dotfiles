@@ -6,3 +6,5 @@ alias vimdiff="nvim -d"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias bc='bc -l'
+
+[ -f "$BASH_LOCAL_DIR"/local.aliases ] && . "$BASH_LOCAL_DIR"/local.aliases
