@@ -3,7 +3,7 @@
 set -e
 
 brew update
-brew upgrade
+brew upgrade --yes
 for cask in $(brew list --casks); do
-  brew upgrade "$cask";
+  brew upgrade --yes "$cask";
 done
