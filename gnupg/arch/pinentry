@@ -1,6 +1,14 @@
 #!/bin/sh
 
-case $PINENTRY_CMD in
-    gtk) exec pinentry-gtk "$@" ;;
-    *) exec pinentry-tty "$@" ;;
+state="${XDG_RUNTIME_DIR}/pinentry-mode"
+if [ -f "$state" ]; then
+    mode=$(cat "$state")
+    rm -f "$state"
+else
+    mode=default
+fi
+
+case "$mode" in
+    gtk|gui) exec pinentry-gtk "$@" ;;
+    tty|*) exec pinentry-tty "$@" ;;
 esac
