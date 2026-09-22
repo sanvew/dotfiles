@@ -41,6 +41,16 @@ vim.opt.imsearch = 0 -- set en as a default language
 vim.api.nvim_create_autocmd('InsertEnter', { command = 'set norelativenumber' })
 vim.api.nvim_create_autocmd('InsertLeave', { command = 'set relativenumber' })
 
+-- text files default formating
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.textwidth = 120
+  end,
+})
+
 vim.api.nvim_create_user_command("ToggleHardWrapNoSpell", function()
     local textwidth = 120
     if vim.opt_local.textwidth:get() > 0 and not vim.opt_local.spell:get() then
