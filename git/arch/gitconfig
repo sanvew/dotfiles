@@ -4,5 +4,6 @@
 [alias]
 	tree = log --graph --date=short --decorate --abbrev-commit --all --pretty=format:'%C(auto)%h %Cgreen%ad %Cblue%an%Creset %s %C(yellow)%d%Creset'
 	s = status
+	co = checkout
 [init]
 	defaultBranch = main
