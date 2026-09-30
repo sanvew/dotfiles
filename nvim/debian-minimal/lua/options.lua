@@ -40,17 +40,3 @@ vim.opt.imsearch = 0 -- set en as a default language
 vim.api.nvim_create_autocmd('InsertEnter', { command = 'set norelativenumber' })
 vim.api.nvim_create_autocmd('InsertLeave', { command = 'set relativenumber' })
 
-vim.api.nvim_create_user_command("ToggleHardWrapNoSpell", function()
-    local textwidth = 120
-    if vim.opt_local.textwidth:get() > 0 and not vim.opt_local.spell:get() then
-        vim.opt_local.textwidth = 0
-        vim.opt_local.formatoptions:remove("t")
-        vim.opt_local.spell = true
-        print("Hard wrap OFF, spellcheck ON (buffer only).")
-    else
-        vim.opt_local.textwidth = textwidth
-        vim.opt_local.formatoptions:append("t")
-        vim.opt_local.spell = false
-        print("Hard wrap ON (textwidth= " .. textwidth .. "), spellcheck OFF (buffer only).")
-    end
-end, { desc = "Toggle hard wrap + no spellcheck for current buffer" })
