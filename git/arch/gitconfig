@@ -7,3 +7,5 @@
 	co = checkout
 [init]
 	defaultBranch = main
+[include]
+	path = ~/.config/git/gitconfig

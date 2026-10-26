@@ -51,45 +51,44 @@ install_modules() {
 ```sh
 usage() {
   cat <<'USAGE'
-Usage: my-script --config FILE [--minimal]
+Usage: my-script -c FILE [-m] [-h] [OPERAND...]
+
+Options:
+  -c FILE  Required configuration path
+  -m       Enable minimal mode
+  -h       Show this help message
 USAGE
 }
 
 minimal=0
 config=""
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    --minimal) minimal=1 ;;
-    --config)
-      if [ "$#" -lt 2 ]; then
-        echo "Missing value for --config" >&2
-        usage
-        exit 2
-      fi
-      config="$2"
-      shift
-      ;;
-    -h|--help) usage; exit 0 ;;
-    *)
-      echo "Unknown argument: $1" >&2
-      usage
-      exit 2
-      ;;
+OPTIND=1
+while getopts 'c:mh' opt; do
+  case "$opt" in
+    c) config=$OPTARG ;;
+    m) minimal=1 ;;
+    h) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
   esac
-  shift
 done
+shift $((OPTIND - 1))
+# remaining operands available in "$@"
 
 if [ -z "$config" ]; then
-  echo "Missing required argument: --config FILE" >&2
-  usage
+  echo "Missing required option: -c FILE" >&2
+  usage >&2
   exit 2
 fi
 ```
 
-- Reject unknown flags early.
-- Exit `2` if a required option value is missing.
-- Exit `2` for usage errors.
-- Exit `2` when mandatory arguments are not provided.
+- Every script has a `usage()` function and an `h` entry in the optstring.
+- Use the POSIX `getopts` builtin; never the external `getopt` (GNU and BSD variants are incompatible).
+- `getopts` supports short options only; do not emulate long options.
+- A `:` after a letter in the optstring means the option takes a value (`$OPTARG`).
+- `getopts` reports unknown options and missing values to stderr itself and yields `?`; handle it via `*)` with exit `2`.
+- Reset `OPTIND=1` when parsing inside a function; `shift` there only affects the function's own positional parameters.
+- `-h` prints usage to stdout and exits `0`; usage errors print usage to stderr and exit `2`.
+- Exit `2` when mandatory options or operands are not provided.
 
 ## Safe Command Execution
 ```sh

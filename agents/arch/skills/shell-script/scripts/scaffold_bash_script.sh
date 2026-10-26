@@ -3,14 +3,27 @@ set -eu
 
 usage() {
   cat <<'USAGE'
-Usage: scaffold_bash_script.sh <output-path> [script-name]
+Usage: scaffold_bash_script.sh [-h] <output-path> [script-name]
 
-Create a POSIX `/bin/sh` script template with strict mode and basic argument parsing.
+Create a POSIX `/bin/sh` script template with strict mode, usage, and
+getopts-based argument parsing.
+
+Options:
+  -h  Show this help message
 USAGE
 }
 
+OPTIND=1
+while getopts 'h' opt; do
+  case "$opt" in
+    h) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
 if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-  usage
+  usage >&2
   exit 2
 fi
 
@@ -32,12 +45,12 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 
 usage() {
   cat <<'USAGE'
-Usage: __SCRIPT_NAME__ --config FILE [--minimal]
+Usage: __SCRIPT_NAME__ -c FILE [-m] [-h]
 
 Options:
-  --config FILE Required configuration path
-  --minimal     Enable minimal mode
-  -h, --help    Show this help message
+  -c FILE  Required configuration path
+  -m       Enable minimal mode
+  -h       Show this help message
 USAGE
 }
 
@@ -60,36 +73,26 @@ parse_args() {
   minimal=0
   config=""
 
-  while [ "$#" -gt 0 ]; do
-    case "$1" in
-      --minimal)
-        minimal=1
-        ;;
-      --config)
-        if [ "$#" -lt 2 ]; then
-          echo "Missing value for --config" >&2
-          usage
-          exit 2
-        fi
-        config="$2"
-        shift
-        ;;
-      -h|--help)
-        usage
-        exit 0
-        ;;
-      *)
-        echo "Unknown argument: $1" >&2
-        usage
-        exit 2
-        ;;
+  OPTIND=1
+  while getopts 'c:mh' opt; do
+    case "$opt" in
+      c) config=$OPTARG ;;
+      m) minimal=1 ;;
+      h) usage; exit 0 ;;
+      *) usage >&2; exit 2 ;;
     esac
-    shift
   done
+  shift $((OPTIND - 1))
+
+  if [ "$#" -gt 0 ]; then
+    echo "Unexpected operand: $1" >&2
+    usage >&2
+    exit 2
+  fi
 
   if [ -z "$config" ]; then
-    echo "Missing required argument: --config FILE" >&2
-    usage
+    echo "Missing required option: -c FILE" >&2
+    usage >&2
     exit 2
   fi
 }
